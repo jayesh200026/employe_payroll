@@ -87,4 +87,11 @@ public class FileApiTest {
 		assertEquals(4, employeePayrollService.printData());
 	}
 
+	@Test
+	public void given4EmployeesWhenReadFromFileShouldMatchEmployeeEntries() {
+
+		EmployePayrollService employeePayrollService = new EmployePayrollService();
+		assertEquals(4, employeePayrollService.readFromFile());
+	}
+
 }
