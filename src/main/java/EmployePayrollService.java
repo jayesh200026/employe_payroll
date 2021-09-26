@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployePayrollService {
+	public enum IOService{
+        CONSOLE_IO,FIlE_IO,DB_IO,REST_IO
+    }
 	private List<EmployePayrollData> employeePayrollList;
 
-	EmployePayrollService(List<EmployePayrollData> employeePayrollList) {
+	public EmployePayrollService(List<EmployePayrollData> employeePayrollList) {
 		this.employeePayrollList = employeePayrollList;
 	}
 
@@ -28,8 +31,15 @@ public class EmployePayrollService {
 	/**
 	 * method to print employee detail to the console
 	 */
-	private void writeEmployeePayrollData() {
-		System.out.println("\nWriting Employee Payroll to Console \n" + employeePayrollList);
+	public void writeEmployeePayrollData(IOService ioService) {
+		if(ioService.equals(IOService.CONSOLE_IO))
+        {
+            System.out.println("\nWriting Employee Payroll roaster to console\n"+employeePayrollList);   
+        }
+        else if(ioService.equals(IOService.FIlE_IO))
+        {
+            new EmployePayrollFileIo().writeData(employeePayrollList);
+        }
 	}
 
 	public static void main(String[] args) {
@@ -37,8 +47,15 @@ public class EmployePayrollService {
 		EmployePayrollService employeePayrollService = new EmployePayrollService(employeePayrollList);
 		Scanner consoleInputReader = new Scanner(System.in);
 		employeePayrollService.readEmployeePayrollData();
-		employeePayrollService.writeEmployeePayrollData();
+		employeePayrollService.writeEmployeePayrollData(IOService.FIlE_IO);
 		consoleInputReader.close();
 	}
+	/**
+	 * @return the number of entries in file
+	 */
+	public long countEntries() {  
+        return new EmployePayrollFileIo().countEntries();
+    }
+	
 
 }
