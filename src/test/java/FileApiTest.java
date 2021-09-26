@@ -70,13 +70,21 @@ public class FileApiTest {
 		EmployePayrollData[] arrayOfEmps = { new EmployePayrollData(1, " Jeff Bezos", 100000.0),
 				new EmployePayrollData(2, "Bill Gates", 200000.0),
 				new EmployePayrollData(3, "Mark Zuckerberg", 300000.0),
-				new EmployePayrollData(4, "Elon Musk ", 4500000.0)};
-				 
+				new EmployePayrollData(4, "Elon Musk ", 4500000.0) };
+
 		EmployePayrollService employeePayrollService;
 		employeePayrollService = new EmployePayrollService(Arrays.asList(arrayOfEmps));
 		employeePayrollService.writeEmployeePayrollData(IOService.FIlE_IO);
 		long entries = employeePayrollService.countEntries();
 		assertEquals(4, entries);
+	}
+
+	@Test
+	public void given4EmployeesWhenPrintedToConsoleShouldMatchEmployeeEntries() {
+
+		EmployePayrollService employeePayrollService = new EmployePayrollService();
+
+		assertEquals(4, employeePayrollService.printData());
 	}
 
 }
