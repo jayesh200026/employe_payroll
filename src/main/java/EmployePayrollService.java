@@ -60,8 +60,20 @@ public class EmployePayrollService {
 		return new EmployePayrollFileIo().countEntries();
 	}
 
+	/**
+	 * @return the number of entries printed
+	 */
 	public long printData() {
 		return new EmployePayrollFileIo().printData();
+	}
+
+	/**
+	 * @return the size of the list indicating number of employees
+	 */
+	public long readFromFile() {
+		this.employeePayrollList = new EmployePayrollFileIo().readData();
+		System.out.println(employeePayrollList.size());
+		return this.employeePayrollList.size();
 	}
 
 }
