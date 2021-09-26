@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import org.junit.Assert;
 import org.junit.Test;
 import main.java.FileUtils;
+import main.java.WatchServiceExample;
 
 public class FileApiTest {
 
@@ -48,6 +49,13 @@ public class FileApiTest {
 		System.out.println("----------------------------");
 		Files.newDirectoryStream(playPath, path -> path.toFile().isFile() && path.toString().startsWith("temp"))
 				.forEach(System.out::println);
+	}
+
+	@Test
+	public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+		Path dir = Paths.get("/Users/jayeshkumar/eclipse-workspace/EmployePayrool/data");
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new WatchServiceExample(dir).processEvents();
 	}
 
 }
