@@ -37,4 +37,19 @@ public class EmployePayrollFileIo {
 		}
 		return entries;
 	}
+
+	/**
+	 * @return the number of entries in file and also prints the entries to console
+	 */
+	public long printData() {
+		long entries = 0;
+		try {
+			entries = Files.lines(new File(PAYROLL_FILE_NAME).toPath()).count();
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return entries;
+	}
+
 }
